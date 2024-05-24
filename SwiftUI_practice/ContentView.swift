@@ -9,157 +9,121 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        numberRow
-        
-    }
-   
-    @ViewBuilder
-    var numberRow: some View {
         ZStack{
             Color.black.ignoresSafeArea()
             VStack{
                 Spacer()
-                HStack{
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("AC")
-                            .modifier(whiteButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("+/-")
-                            .modifier(whiteButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("%")
-                            .modifier(whiteButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("÷")
-                            .modifier(whiteButton())
-                    })
-                }
-                
-                HStack{
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("7")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("8")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("9")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("X")
-                            .modifier(orangeButton())
-                    })
-                }
-                
-                HStack{
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("4")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("5")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("6")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("-")
-                            .modifier(orangeButton())
-                    })
-                }
-                
-                HStack{
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("3")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("2")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("1")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("+")
-                            .modifier(orangeButton())
-                    })
-                }
-                
-                HStack{
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("0")
-                            .frame(width: 160, height: 80, alignment: .leading)
-                            .background(.gray)
-                            .cornerRadius(40)
-                            .font(.system(size: 28))
-                            .foregroundColor(.white)
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text(".")
-                            .modifier(grayButton())
-                    })
-                    Button(action:
-                            {self.buttonTapped()},
-                           label: {
-                        Text("=")
-                            .modifier(orangeButton())
-                    })
-                }
+                numberRow
+            }
+        }
+    }
+        
+    @ViewBuilder
+    var numberRow: some View {
+        HStack{
+            makeWhiteButton(text: "AC"){
+                self.buttonTapped(text: "AC")
+            }
+            makeWhiteButton(text: "+/-"){
+                self.buttonTapped(text: "+/-")
+            }
+            makeWhiteButton(text: "%"){
+                self.buttonTapped(text: "%")
+            }
+            makeOrangeButton(text: "÷"){
+                self.buttonTapped(text: "÷")
             }
         }
         
+        HStack{
+            makeGrayButton(text: "9"){
+                self.buttonTapped(text: "9")
+            }
+            makeGrayButton(text: "8"){
+                self.buttonTapped(text: "8")
+            }
+            makeGrayButton(text: "7"){
+                self.buttonTapped(text: "7")
+            }
+            makeOrangeButton(text: "X"){
+                self.buttonTapped(text: "X")
+            }
+        }
         
+        HStack{
+            makeGrayButton(text: "6"){
+                self.buttonTapped(text: "6")
+            }
+            makeGrayButton(text: "5"){
+                self.buttonTapped(text: "5")
+            }
+            makeGrayButton(text: "4"){
+                self.buttonTapped(text: "4")
+            }
+            makeOrangeButton(text: "-"){
+                self.buttonTapped(text: "-")
+            }
+        }
+        
+        HStack{
+            makeGrayButton(text: "3"){
+                self.buttonTapped(text: "3")
+            }
+            makeGrayButton(text: "2"){
+                self.buttonTapped(text: "2")
+            }
+            makeGrayButton(text: "1"){
+                self.buttonTapped(text: "1")
+            }
+            makeOrangeButton(text: "+"){
+                self.buttonTapped(text: "+")
+            }
+        }
+        
+        HStack{
+            Button(action:
+                    {self.buttonTapped(text: "0")},
+                   label: {
+                Text("0")
+                    .frame(width: 160, height: 80, alignment: .leading)
+                    .background(.gray)
+                    .cornerRadius(40)
+                    .font(.system(size: 28))
+                    .foregroundColor(.white)
+            })
+            makeGrayButton(text: "."){
+                self.buttonTapped(text: ".")
+            }
+            makeOrangeButton(text: "="){
+                self.buttonTapped(text: "=")
+            }
+        }
+    }
+    func buttonTapped(text: String) {
+        print(text)
     }
     
-    func buttonTapped() {
-        print("tapped button")
+    func makeWhiteButton(text: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(text)
+                .modifier(whiteButton())
+        }
     }
+    
+    func makeGrayButton(text: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(text)
+                .modifier(grayButton())
+        }
+    }
+    
+    func makeOrangeButton(text: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Text(text)
+                .modifier(orangeButton())
+        }
+    }
+
 }
 
 #Preview {
