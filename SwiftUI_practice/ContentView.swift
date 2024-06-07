@@ -13,6 +13,7 @@ struct ContentView: View {
             Color.black.ignoresSafeArea()
             VStack {
                 Spacer()
+                ResultView(result: "Hello, World!")
                 numberRow
             }
         }
