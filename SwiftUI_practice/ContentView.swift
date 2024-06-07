@@ -99,28 +99,15 @@ struct ContentView: View {
             }
         }
     }
+    
     func buttonTapped(text: String) {
         print(text)
     }
     
-    func makeWhiteButton(text: String, action: @escaping () -> Void) -> some View {
+    func makeCaculateButton(text: Any, action: @escaping () -> Void, backgroundColor: UIColor, foregroundColor: UIColor) -> some View {
         Button(action: action) {
-            Text(text)
-                .modifier(whiteButton())
-        }
-    }
-    
-    func makeGrayButton(text: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(text)
-                .modifier(grayButton())
-        }
-    }
-    
-    func makeOrangeButton(text: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(text)
-                .modifier(orangeButton())
+            Text(String(describing: text))
+                .modifier(caculateButton(backgroundColor: backgroundColor, foregroundColor: foregroundColor))
         }
     }
 
@@ -130,35 +117,21 @@ struct ContentView: View {
     ContentView()
 }
 
-struct whiteButton : ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .frame(width: 80, height: 80)
-            .background(.white)
-            .cornerRadius(40)
-            .font(.system(size: 28))
-            .foregroundColor(.black)
+struct caculateButton: ViewModifier {
+    var backgroundColor : Color
+    var foregroundColor : Color
+    
+    init(backgroundColor: UIColor, foregroundColor: UIColor) {
+        self.backgroundColor = Color(backgroundColor)
+        self.foregroundColor = Color(foregroundColor)
     }
-}
-
-struct grayButton : ViewModifier {
+    
     func body(content: Content) -> some View {
         content
             .frame(width: 80, height: 80)
-            .background(.gray)
+            .background(backgroundColor)
             .cornerRadius(40)
             .font(.system(size: 28))
-            .foregroundColor(.white)
-    }
-}
-
-struct orangeButton : ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .frame(width: 80, height: 80)
-            .background(.orange)
-            .cornerRadius(40)
-            .font(.system(size: 28))
-            .foregroundColor(.white)
+            .foregroundColor(foregroundColor)
     }
 }
