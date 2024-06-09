@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = CaculatorViewModel()
+    
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
             VStack {
                 Spacer()
-                ResultView(result: "Hello, World!")
+                ResultView(result: viewModel.caculateResult)
                 numberRow
             }
         }
@@ -25,16 +27,12 @@ struct ContentView: View {
                 HStack(spacing: 10) {
                     ForEach(row, id: \.self) { button in
                         ButtonView(type: button) {
-                            //self.buttonTapped(text: button.rawValue)
+                            viewModel.buttonTapped(button: button)
                         }
                     }
                 }
             }
         }
-    }
-
-    func buttonTapped(text: String) {
-        print(text)
     }
 }
 
