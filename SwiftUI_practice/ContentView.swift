@@ -25,7 +25,7 @@ struct ContentView: View {
                 HStack(spacing: 10) {
                     ForEach(row, id: \.self) { button in
                         ButtonView(type: button) {
-                            self.buttonTapped(text: button.rawValue)
+                            //self.buttonTapped(text: button.rawValue)
                         }
                     }
                 }

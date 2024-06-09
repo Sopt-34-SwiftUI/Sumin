@@ -13,8 +13,8 @@ struct ButtonView: View {
 
     var body: some View {
         Button(action: action) {
-            Text(type.rawValue)
-                .frame(width: type == .zero ? 160 : 80, height: 80)
+            Text(type.title)
+                .frame(width: type == .digit(.zero) ? 160 : 80, height: 80)
                 .background(type.backgroundColor)
                 .cornerRadius(40)
                 .font(.system(size: 28))

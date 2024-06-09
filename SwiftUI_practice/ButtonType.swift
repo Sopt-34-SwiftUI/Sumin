@@ -40,6 +40,17 @@ enum ButtonType: Hashable {
        case percent = "%"
    }
     
+    var title: String {
+        switch self {
+        case .digit(let digit):
+            return digit.rawValue
+        case .operation(let operation):
+            return operation.rawValue
+        case .utility(let utility):
+            return utility.rawValue
+        }
+    }
+    
     var backgroundColor: Color {
         switch self {
         case .utility(let utility):
