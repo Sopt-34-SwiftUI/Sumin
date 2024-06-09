@@ -7,32 +7,44 @@
 
 import SwiftUI
 
-enum ButtonType: String, CaseIterable {
-    case ac = "AC"
-    case plusMinus = "+/-"
-    case percent = "%"
-    case divide = "÷"
-    case multiply = "X"
-    case subtract = "-"
-    case add = "+"
-    case equal = "="
-    case decimal = "."
-    case zero = "0"
-    case one = "1"
-    case two = "2"
-    case three = "3"
-    case four = "4"
-    case five = "5"
-    case six = "6"
-    case seven = "7"
-    case eight = "8"
-    case nine = "9"
+enum ButtonType: Hashable {
+    case digit(Digit)
+   case operation(Operation)
+   case utility(Utility)
+
+   enum Digit: String, CaseIterable {
+       case zero = "0"
+       case one = "1"
+       case two = "2"
+       case three = "3"
+       case four = "4"
+       case five = "5"
+       case six = "6"
+       case seven = "7"
+       case eight = "8"
+       case nine = "9"
+       case decimal = "."
+   }
+
+   enum Operation: String, CaseIterable {
+       case divide = "÷"
+       case multiply = "X"
+       case subtract = "-"
+       case add = "+"
+       case equal = "="
+   }
+
+   enum Utility: String, CaseIterable {
+       case ac = "AC"
+       case plusMinus = "+/-"
+       case percent = "%"
+   }
     
     var backgroundColor: Color {
         switch self {
-        case .ac, .plusMinus, .percent:
+        case .utility(let utility):
             return Color.white
-        case .divide, .multiply, .subtract, .add, .equal:
+        case .operation(let operation):
             return Color.orange
         default:
             return Color.gray
@@ -41,7 +53,7 @@ enum ButtonType: String, CaseIterable {
     
     var foregroundColor: Color {
         switch self {
-        case .ac, .plusMinus, .percent:
+        case .utility(let utility):
             return Color.black
         default:
             return Color.white
@@ -50,11 +62,11 @@ enum ButtonType: String, CaseIterable {
     
     static var rows: [[ButtonType]] {
         [
-            [.ac, .plusMinus, .percent, .divide],
-            [.seven, .eight, .nine, .multiply],
-            [.four, .five, .six, .subtract],
-            [.one, .two, .three, .add],
-            [.zero, .decimal, .equal]
+            [.utility(.ac), .utility(.plusMinus), .utility(.percent), .operation(.divide)],
+            [.digit(.seven), .digit(.eight), .digit(.nine), .operation(.multiply)],
+            [.digit(.four), .digit(.five), .digit(.six), .operation(.subtract)],
+            [.digit(.one), .digit(.two), .digit(.three), .operation(.add)],
+            [.digit(.zero), .digit(.decimal), .operation(.equal)]
         ]
     }
 }
